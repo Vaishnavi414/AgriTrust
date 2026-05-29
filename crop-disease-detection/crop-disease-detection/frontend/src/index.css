@@ -1,0 +1,10 @@
+/**
+ * Tailwind v4 entry (via `@tailwindcss/vite`).
+ * Add global tweaks below if you want, but most styling uses utility classes in components.
+ */
+@import 'tailwindcss';
+
+body {
+  margin: 0;
+  min-height: 100vh;
+}

@@ -1,0 +1,106 @@
+[
+  {
+    "questions": ["How are agricultural products verified?", "Is crop quality guaranteed?"],
+    "answer": "Products are verified through AI-based quality assessment and blockchain-recorded histories to ensure authenticity and trust."
+  },
+  {
+    "questions": ["How do you define 'Smart Farming' in this context?", "What is smart farming?"],
+    "answer": "It is the use of AI, data analytics, and digital tools to improve crop quality, yield prediction, and agricultural decision-making."
+  },
+  {
+    "questions": ["What features are available in the user dashboard?", "What can I see on my dashboard?"],
+    "answer": "The dashboard displays crop assessments, transaction history, reputation/credit scores, and marketplace activity."
+  },
+  {
+    "questions": ["What are the technical constraints of the system?", "What does the platform depend on to work?"],
+    "answer": "The system depends on accurate user-provided crop data, stable backend/blockchain services, and reliable internet connectivity."
+  },
+  {
+    "questions": ["What motivated the development of this platform?", "Why is this system necessary for farmers?"],
+    "answer": "The motivation was to fix unfair pricing, dependency on middlemen, and lack of transparency, while helping buyers verify product authenticity."
+  },
+  {
+    "questions": ["What is the scope of this project?", "What does the platform cover?"],
+    "answer": "The scope includes creating a digital marketplace, integrating AI for crop grading/pricing, developing blockchain transaction systems, and generating reputation scores."
+  },
+  {
+    "questions": ["What is the purpose of smart contracts in this system?", "How are payments automated?"],
+    "answer": "Smart contracts automatically manage secure payments and execute transactions once specific trade conditions are met, reducing fraud and delays."
+  },
+  {
+    "questions": ["What factors affect AI price prediction?", "How is the fair market value estimated?"],
+    "answer": "Price estimation is based on AI evaluation of crop quality, predicted yield, and real-time market demand data."
+  },
+  {
+    "questions": ["What are the future expansion plans for the project?", "What features will be added in the future?", "Will the system support IoT devices?", "Are there plans for real-time monitoring?"],
+    "answer": "Future plans include IoT integration for real-time monitoring, multilingual support, AI-driven advisory services, and end-to-end supply chain tracking."
+  },
+  {
+    "questions": ["How is data security maintained?", "Are my transactions safe?", "How is transaction data protected?", "Is my personal data safe?"],
+    "answer": "User, crop, and transaction data are encrypted, and blockchain technology ensures tamper-proof storage for all financial interactions."
+  },
+  {
+    "questions": ["What are the primary functional requirements for farmers?", "What can farmers do on the platform?"],
+    "answer": "Farmers can register securely, upload crop images/details for AI analysis, view price predictions, and list their produce on the marketplace."
+  },
+  {
+    "questions": ["What are the layers of the proposed project model?", "How is the system architecture structured?"],
+    "answer": "The model consists of a Data Acquisition Layer, AI Processing Layer, Blockchain Transaction Layer, Marketplace Layer, UI & Dashboard Layer, and Database Layer."
+  },
+  {
+    "questions": ["What are the main objectives of the system?", "What does the project aim to achieve?"],
+    "answer": "The main objectives are to eliminate middlemen, use AI for crop grading and price estimation, implement blockchain for secure trades, and build a farmer reputation system."
+  },
+  {
+    "questions": ["How does the platform eliminate middlemen?", "Can farmers sell directly to consumers?", "Who are the buyers on this platform?"],
+    "answer": "By directly connecting farmers with retailers, wholesalers, and consumers, the platform removes intermediaries to ensure fair pricing and transparency."
+  },
+  {
+    "questions": ["What is the blockchain-powered reputation system?", "How does the credit scoring system work?", "How can farmers gain credibility for loans?", "How does the platform help with financial support?", "Can farmers get loans through this?"],
+    "answer": "The system features a reputation and credit scoring system based on blockchain records, helping farmers gain credibility to access loans, insurance, and subsidies."
+  },
+  {
+    "questions": ["How does blockchain ensure secure transactions?", "What is the role of blockchain in this marketplace?", "Is the system tamper-proof?"],
+    "answer": "Blockchain technology enables smart contracts and decentralized records to ensure secure, tamper-proof transactions and transparent farmer-to-buyer interactions."
+  },
+  {
+    "questions": ["How does the AI module assess crop quality?", "What does the AI intelligence do?", "How is crop quality determined?"],
+    "answer": "The system uses AI-based crop intelligence to automatically assess crop quality, detect diseases, predict yield, and estimate fair market prices using image analysis."
+  },
+  {
+    "questions": ["What challenges does the agricultural sector face?", "Why was this project started?", "What issues does this system address?"],
+    "answer": "The sector faces challenges such as middlemen exploitation, lack of transparent trading systems, and limited access to reliable crop intelligence."
+  },
+  {
+    "questions": ["What is the AI-Driven Smart Farming Marketplace?", "Can you define this project?", "What is the purpose of this platform?"],
+    "answer": "It is an integrated platform designed to empower farmers and create a trust-based agricultural ecosystem using AI-based crop intelligence and blockchain technology."
+  },
+  {
+    "questions": ["How reliable is the fair price estimation?", "Where does market data come from?"],
+    "answer": "Fair market prices are estimated by combining AI crop analysis with real-time data on market demand and existing market rates."
+  },
+  {
+    "questions": ["Does the system track products from farm to table?", "Is there traceability?"],
+    "answer": "Currently, the system ensures traceability between direct buyer-farmer trades, with future plans for full supply-chain tracking."
+  },
+  {
+    "questions": ["Does the app work on mobile phones?", "What browsers are supported?"],
+    "answer": "The platform is designed to operate smoothly across modern web browsers and is accessible on both mobile and desktop devices."
+  },
+  {
+    "questions": ["Can the system handle many users at once?", "Is the architecture scalable?"],
+    "answer": "The system is designed with a scalable architecture to support an increasing number of users, crop listings, and transactions without degrading performance."
+  },
+  {
+    "questions": ["Is an internet connection required?", "Does the marketplace work offline?"],
+    "answer": "A continuous internet connection is required for data uploads, AI processing, and secure blockchain transaction verification."
+  },
+  {
+    "questions": ["What happens if I upload a blurry image?", "Why is my AI prediction inaccurate?"],
+    "answer": "Inaccurate or poor-quality image inputs can reduce AI prediction accuracy, as the platform relies on clear data for correct assessments."
+  },
+  {
+    "questions": ["Do users need technical skills to use this?", "Who can use this app?"],
+    "answer": "Intended users include farmers and buyers who are expected to have basic agricultural knowledge and minimal technical skills to use the web interface."
+  }
+]

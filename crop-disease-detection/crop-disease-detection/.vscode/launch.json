@@ -1,0 +1,19 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Flask Backend (crop-disease)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/backend/app.py",
+      "cwd": "${workspaceFolder}/backend",
+      "python": "${workspaceFolder}/backend/.venv/Scripts/python.exe",
+      "console": "integratedTerminal",
+      "env": {
+        "TF_CPP_MIN_LOG_LEVEL": "2",
+        "TF_ENABLE_ONEDNN_OPTS": "0"
+      },
+      "justMyCode": true
+    }
+  ]
+}

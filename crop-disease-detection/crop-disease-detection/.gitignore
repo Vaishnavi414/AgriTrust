@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# Virtual environments
+backend/.venv/
+.venv/
+
+# Local uploads (keep folder, ignore files)
+backend/uploads/*
+!backend/uploads/.gitkeep
+
+# OS / editor
+.DS_Store
+Thumbs.db
+
+# Node / React (Vite)
+node_modules/
+frontend/node_modules/
+frontend/dist/
+frontend/.env

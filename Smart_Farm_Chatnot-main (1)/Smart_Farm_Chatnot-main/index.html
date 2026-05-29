@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriTrust Chatbot</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="website-stub" style = "overflow-x: hidden; overflow-y: hidden;">
+    <img src="home.png" alt="Smart Farm Website" style="width:105%; height:80%;  opacity: 1; ">
+</div>
+
+<div class="main-wrapper">
+    <button class="chat-trigger" onclick="toggleChat()">
+        <span class="pulse"></span>
+        <span class="leaf-icon">🌿</span>
+    </button>
+
+    <div id="agritrust-chat" class="chat-widget chat-hidden">
+        <header class="chat-header">
+            <div class="bot-info">
+                <span class="leaf-icon">🌿</span>
+                <h3>AgriTrust Eco-Bot</h3>
+            </div>
+            <button class="close-btn" onclick="toggleChat()">✕</button>
+        </header>
+
+        <div id="chat-box" class="chat-box">
+            <div class="welcome-image">
+                <img src="automatic-vegetable-plucking.svg" alt="AgriTrust Farmer Robot AI">
+            </div>
+
+            <div class="msg ai">
+                <strong>Hello! 🌿</strong><br>
+                I am your AgriTrust Eco-Bot. How can I assist with your crops or secure blockchain transactions today?
+            </div>
+        </div>
+
+        <div class="input-area">
+            <input type="text" id="user-input" placeholder="Query AgriTrust intelligence...">
+            <button onclick="sendMessage()" id="send-btn">🚀</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 1. Toggle Chat Widget Visibility
+    function toggleChat() {
+        const chatWidget = document.getElementById('agritrust-chat');
+        chatWidget.classList.toggle('chat-hidden');
+    }
+
+    // 2. Send Message Logic
+    async function sendMessage() {
+        const input = document.getElementById('user-input');
+        const chatBox = document.getElementById('chat-box');
+        const message = input.value;
+        if (!message) return;
+
+        // Add User Message
+        chatBox.innerHTML += `<div class="msg user">${message}</div>`;
+        input.value = '';
+        chatBox.scrollTop = chatBox.scrollHeight;
+
+        try {
+            const response = await fetch('http://localhost:3000/api/chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message })
+            });
+            const data = await response.json();
+            
+            // Check for API key error
+            if (data.text && data.text.includes('GROQ_API_KEY not configured')) {
+                chatBox.innerHTML += `<div class="msg ai" style="color:#ff6b6b;"><strong>Configuration Error:</strong><br>Get a free API key from <a href="https://console.groq.com" target="_blank">console.groq.com</a><br>Add GROQ_API_KEY to your .env file</div>`;
+                chatBox.scrollTop = chatBox.scrollHeight;
+                return;
+            }
+            
+            // --- FORMATTER SECTION ---
+            // 1. Replace double asterisks with <strong> tags
+            // 2. Replace the bullet points (*) with green checkmarks and line breaks
+            let formattedText = data.text
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') 
+                .replace(/\* /g, '<br>✅ ');
+
+            // Add the formatted AI Message to the UI
+            chatBox.innerHTML += `<div class="msg ai">${formattedText}</div>`;
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+        } catch (err) {
+            chatBox.innerHTML += `<div class="msg ai" style="color:#ff6b6b;">Error: Ensure your Node server is running! (${err.message})</div>`;
+        }
+    }
+</script>
+</body>
+</html>

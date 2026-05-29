@@ -1,0 +1,10 @@
+{
+  "backbone": "mobilenet_v2",
+  "img_size": [
+    224,
+    224
+  ],
+  "num_classes": 15,
+  "trained_on": "C:\\Users\\Srushti\\Desktop\\crop-disease-detection\\dataset\\PlantVillage",
+  "best_val_accuracy": 0.9258541464805603
+}
