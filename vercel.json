@@ -1,11 +1,11 @@
 {
   "builds": [
     {
-      "src": "package.json",
+      "src": "New folder (5)/New folder (3)/smart_farm_new/package.json",
       "use": "@vercel/static-build"
     }
   ],
-  "outputDirectory": "New folder (5)/New folder (3)/smart_farm_new/dist",
+  "outputDirectory": "dist",
   "rewrites": [
     {
       "source": "/(.*)",
