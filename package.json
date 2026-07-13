@@ -1,0 +1,7 @@
+{
+  "name": "agritrust-root",
+  "private": true,
+  "scripts": {
+    "build": "npm --prefix \"New folder (5)/New folder (3)/smart_farm_new\" install --no-audit --no-fund && npm --prefix \"New folder (5)/New folder (3)/smart_farm_new\" run build"
+  }
+}
