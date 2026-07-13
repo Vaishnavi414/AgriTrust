@@ -201,6 +201,11 @@ contract FarmingMarketplace {
             !transactions[transactionHash].completed,
             "Transaction already completed"
         );
+        require(
+            msg.sender == transactions[transactionHash].farmer ||
+            msg.sender == transactions[transactionHash].buyer,
+            "Only farmer or buyer can complete transaction"
+        );
 
         transactions[transactionHash].completed = true;
 
@@ -281,7 +286,7 @@ contract FarmingMarketplace {
     
     // Mapping from purchase ID to purchase record
     mapping(bytes32 => CropPurchase) public cropPurchases;
-    bytes32[] public purchaseIds;
+    bytes32[] public purchaseIdsList;
     
     // Event for crop purchase
     event CropPurchased(
@@ -334,7 +339,7 @@ contract FarmingMarketplace {
             timestamp: block.timestamp,
             withdrawn: false
         });
-        purchaseIds.push(purchaseId);
+        purchaseIdsList.push(purchaseId);
 
         // Mark product as sold to prevent duplicate purchases
         productSold[productId] = true;
@@ -359,16 +364,20 @@ contract FarmingMarketplace {
             require(!purchase.withdrawn, "Already withdrawn");
             
             totalWithdrawal += purchase.price;
-            purchase.withdrawn = true;
-            
-            emit FarmerWithdrawn(purchaseId, msg.sender, purchase.price);
         }
         
         require(totalWithdrawal > 0, "No funds to withdraw");
+        require(address(this).balance >= totalWithdrawal, "Insufficient contract balance");
         
         // Transfer funds to farmer (msg.sender)
         (bool success, ) = payable(msg.sender).call{value: totalWithdrawal}("");
         require(success, "Transfer failed");
+        
+        // Mark as withdrawn and emit events ONLY after successful transfer
+        for (uint256 i = 0; i < purchaseIds.length; i++) {
+            cropPurchases[purchaseIds[i]].withdrawn = true;
+            emit FarmerWithdrawn(purchaseIds[i], msg.sender, cropPurchases[purchaseIds[i]].price);
+        }
     }
 
     /**
@@ -404,6 +413,6 @@ contract FarmingMarketplace {
      * @dev Get total purchases count
      */
     function getTotalPurchases() public view returns (uint256) {
-        return purchaseIds.length;
+        return purchaseIdsList.length;
     }
 }

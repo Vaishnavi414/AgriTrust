@@ -16,7 +16,7 @@ const Login = lazy(() => import('./pages/Login').then(module => ({ default: modu
 const Register = lazy(() => import('./pages/Register').then(module => ({ default: module.Register })));
 const FarmerDashboard = lazy(() => import('./pages/FarmerDashboard').then(module => ({ default: module.FarmerDashboard })));
 const BuyerDashboard = lazy(() => import('./pages/BuyerDashboard').then(module => ({ default: module.BuyerDashboard })));
-const BiddingSystem = lazy(() => import('./pages/BiddingSystem').then(module => ({ default: module.BiddingSystem })));
+
 const ChatbotApp = lazy(() => import('./pages/ChatbotApp'));
 const AIPredictionApp = lazy(() => import('./pages/AIPredictionApp'));
 const WeatherApp = lazy(() => import('./pages/WeatherApp'));
@@ -38,7 +38,7 @@ const AnimatedRoutes = () => {
           <Route path="/farmer-dashboard" element={<FarmerDashboard />} />
           <Route path="/buyer-dashboard" element={<BuyerDashboard />} />
           <Route path="/dashboard" element={<Dashboard />} />
-<Route path="/bidding" element={<BiddingSystem />} />
+
 <Route path="/chatbot" element={<ChatbotApp />} />
             <Route path="/ai-prediction" element={<AIPredictionApp />} />
             <Route path="/weather" element={<WeatherApp />} />

@@ -18,7 +18,7 @@ const FeaturesSection = () => {
   const { ref: sectionRef, isVisible } = useScrollAnimation(0.3);
 
   return (
-    <section className="py-28 pb-112 relative overflow-hidden" id="services" ref={sectionRef}>
+     <section className="py-28 pb-112 relative overflow-hidden" id="services" ref={sectionRef}>
       <div className="absolute inset-0">
         <img src={servicesBg} alt="Services background" className="w-full h-full object-cover" />
         <div className="absolute inset-0" />

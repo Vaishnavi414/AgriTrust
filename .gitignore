@@ -1,1 +1,49 @@
+# Local dataset
 crop-disease-detection/crop-disease-detection/dataset/
+
+# Environment files and secrets
+.env
+.env.local
+.env.*
+!.env.example
+!.env.sample
+.envrc
+*.pem
+*.key
+*.p12
+*.pfx
+*.pkcs8
+*.der
+*.wallet
+*.secret
+*.secrets
+secrets.json
+secrets.*
+**/secrets/**
+**/.secrets/**
+
+# Dependency and build artifacts
+node_modules/
+dist/
+dist-ssr/
+.cache/
+coverage/
+build/
+*.tsbuildinfo
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Editor and OS clutter
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

@@ -34,7 +34,7 @@ export function BuyerDashboard() {
   const [products, setProducts] = useState([]);
   const [transactions, setTransactions] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [bidAmount, setBidAmount] = useState('');
+  
   const [loading, setLoading] = useState(true);
   const [purchasing, setPurchasing] = useState(false);
   const [purchaseQuantity, setPurchaseQuantity] = useState('');
@@ -534,21 +534,7 @@ export function BuyerDashboard() {
 
   const walletBalanceInr = wallet ? parseFloat(wallet.balanceInEth) * ethRate : 0;
 
-  async function handleBid() {
-    if (!profile || !selectedProduct || !bidAmount) return;
 
-    const { error } = await supabase.from('bids').insert({
-      product_id: selectedProduct.id,
-      buyer_id: profile.id,
-      bid_amount: parseFloat(bidAmount),
-    });
-
-    if (!error) {
-      setBidAmount('');
-      setSelectedProduct(null);
-      alert('Bid submitted successfully!');
-    }
-  }
 
   async function requestFreshAccount() {
     if (!isMetaMaskInstalled()) return null;
@@ -955,21 +941,15 @@ export function BuyerDashboard() {
                         <p className="text-sm text-gray-600 mb-3">{product.description}</p>
                       )}
 <div className="flex space-x-2">
-                        <button
-                          onClick={() => handlePurchaseClick(product)}
-                          disabled={!wallet?.connected || purchasing || product.status === 'sold' || !product.farmer_wallet_address}
-                          className="flex-1 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed"
-                          title={!product.farmer_wallet_address ? 'Farmer has not connected their wallet yet' : ''}
-                        >
-                          {product.status === 'sold' ? 'Sold' : !product.farmer_wallet_address ? 'Wallet Required' : purchasing ? 'Processing...' : 'Buy Now'}
-                        </button>
-                        <button
-                          onClick={() => setSelectedProduct(product)}
-                          className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium"
-                        >
-                          Place Bid
-                        </button>
-                      </div>
+                         <button
+                           onClick={() => handlePurchaseClick(product)}
+                           disabled={!wallet?.connected || purchasing || product.status === 'sold' || !product.farmer_wallet_address}
+                           className="flex-1 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+                           title={!product.farmer_wallet_address ? 'Farmer has not connected their wallet yet' : ''}
+                         >
+                           {product.status === 'sold' ? 'Sold' : !product.farmer_wallet_address ? 'Wallet Required' : purchasing ? 'Processing...' : 'Buy Now'}
+                         </button>
+                       </div>
                     </div>
                   </div>
                 ))}
@@ -1112,43 +1092,6 @@ export function BuyerDashboard() {
         </div>
       )}
 
-      {selectedProduct && !showPurchaseModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-xl max-w-md w-full p-6">
-            <h3 className="text-xl font-bold text-gray-900 mb-4">Place a Bid</h3>
-            <p className="text-gray-600 mb-4">Bidding on: <span className="font-medium">{selectedProduct.crop_name}</span></p>
-            <p className="text-sm text-gray-600 mb-4">Current Price: ₹{selectedProduct.farmer_price}/{selectedProduct.unit}</p>
-
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700 mb-2">Your Bid Amount (₹/{selectedProduct.unit})</label>
-              <input
-                type="number"
-                step="0.01"
-                value={bidAmount}
-                onChange={(e) => setBidAmount(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder="Enter your bid"
-              />
-            </div>
-
-            <div className="flex space-x-3">
-              <button
-                onClick={handleBid}
-                disabled={!bidAmount}
-                className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                Submit Bid
-              </button>
-              <button
-                onClick={() => { setSelectedProduct(null); setBidAmount(''); }}
-                className="flex-1 px-4 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 transition-colors"
-              >
-                Cancel
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

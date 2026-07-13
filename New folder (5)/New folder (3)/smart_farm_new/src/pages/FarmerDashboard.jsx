@@ -8,15 +8,7 @@ import { predictPrice, calculateTotalPrice } from '../lib/aiPricePredictor';
 import { detectProductCategory, formatUploadDate } from '../lib/utils';
 import { withdrawFunds, formatAddress, getPurchase } from '../lib/blockchain';
 
-const Bid = {
-  id: '',
-  product_id: '',
-  buyer_id: '',
-  bid_amount: 0,
-  status: 'pending',
-  created_at: '',
-  product: null,
-};
+
 
 export function FarmerDashboard() {
   const navigate = useNavigate();
@@ -24,7 +16,7 @@ export function FarmerDashboard() {
   const { wallet, connectWallet: connectWalletContext } = useWalletContext();
   const [products, setProducts] = useState([]);
   const [transactions, setTransactions] = useState([]);
-  const [bids, setBids] = useState([]);
+  
   const [showAddForm, setShowAddForm] = useState(false);
   const [loading, setLoading] = useState(true);
 
@@ -57,7 +49,6 @@ export function FarmerDashboard() {
       loadProducts();
       loadTransactions();
       loadBlockchainPurchases();
-      loadBids();
     }
   }, [profile?.id]);
 
@@ -467,39 +458,7 @@ if (!idsToProcess || !Array.isArray(idsToProcess) || idsToProcess.length === 0) 
     }
   };
 
-  const loadBids = async () => {
-    if (!profile?.id) return;
 
-    const { data, error } = await supabase
-      .from('bids')
-      .select(`
-        *,
-        products!inner (
-          crop_name,
-          quantity,
-          unit,
-          farmer_price,
-          ai_suggested_price
-        )
-      `)
-      .eq('products.farmer_id', profile.id)
-      .order('created_at', { ascending: false });
-
-    if (!error && data) {
-      setBids(data);
-    }
-  };
-
-  const handleBidAction = async (bidId, action) => {
-    const { error } = await supabase
-      .from('bids')
-      .update({ status: action })
-      .eq('id', bidId);
-
-    if (!error) {
-      loadBids();
-    }
-  };
 
    const handleLogout = async () => {
      try {
@@ -917,7 +876,7 @@ const handlePredictPrice = async () => {
                   className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm"
                 >
                   <TrendingUp size={16} />
-                  <span>Get AI Price Suggestion</span>
+                  <span>Get Price Suggestion</span>
                 </button>
                 {aiSuggestedPrice > 0 && (
                   <p className="mt-2 text-sm text-green-600 font-medium">
@@ -1104,7 +1063,7 @@ const handlePredictPrice = async () => {
                         <p>Quantity: {product.quantity} {product.unit}</p>
                         <p>Price: ₹{product.farmer_price}/{product.unit}</p>
                         <p className="text-blue-600">
-                          AI Suggested: ₹{product.ai_suggested_price}/{product.unit}
+                           Suggested price: ₹{product.ai_suggested_price}/{product.unit}
                         </p>
                       </div>
                       <span
@@ -1126,62 +1085,7 @@ const handlePredictPrice = async () => {
           </div>
         </div>
 
-        <div className="bg-white rounded-xl shadow-sm border border-gray-100 mb-8">
-          <div className="p-6 border-b border-gray-100 flex items-center space-x-2">
-            <Gavel size={24} className="text-gray-700" />
-            <h2 className="text-xl font-bold text-gray-900">Bids on My Products</h2>
-          </div>
-          <div className="p-6">
-            {bids.length === 0 ? (
-              <p className="text-center text-gray-500 py-8">No bids received yet</p>
-            ) : (
-              <div className="space-y-4">
-                {bids.map((bid) => (
-                  <div key={bid.id} className="border border-gray-200 rounded-lg p-4">
-                    <div className="flex justify-between items-start mb-4">
-                      <div className="flex-1">
-                        <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                          {bid.product?.crop_name}
-                        </h3>
-                        <div className="flex items-center space-x-4 text-sm text-gray-500">
-                          <span>Bid Amount: ₹{bid.bid_amount}/kg</span>
-                          <span>Your Price: ₹{bid.product?.farmer_price}/kg</span>
-                          <span>Quantity: {bid.product?.quantity} {bid.product?.unit}</span>
-                        </div>
-                        <div className="text-sm text-gray-500 mt-2">
-                          Received: {new Date(bid.created_at).toLocaleDateString()}
-                        </div>
-                      </div>
-                      <div className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                        bid.status === 'pending' ? 'bg-yellow-100 text-yellow-800' :
-                        bid.status === 'accepted' ? 'bg-green-100 text-green-800' :
-                        'bg-red-100 text-red-800'
-                      }`}>
-                        {bid.status}
-                      </div>
-                    </div>
-                    {bid.status === 'pending' && (
-                      <div className="flex space-x-3">
-                        <button
-                          onClick={() => handleBidAction(bid.id, 'accepted')}
-                          className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm font-medium"
-                        >
-                          Accept Bid
-                        </button>
-                        <button
-                          onClick={() => handleBidAction(bid.id, 'rejected')}
-                          className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors text-sm font-medium"
-                        >
-                          Reject Bid
-                        </button>
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        </div>
+
 
         <div className="bg-white rounded-xl shadow-sm border border-gray-100 mb-8">
           <div className="p-6 border-b border-gray-100">

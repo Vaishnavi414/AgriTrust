@@ -78,7 +78,7 @@ const ProductShowcase = () => {
             Featured Products from Farmers
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Fresh produce directly from our verified farmers. Quality guaranteed with secure transactions.
+            Fresh produce directly from our verified farmers. Quality guaranteed with blockchain verification.
           </p>
         </motion.div>
 
